@@ -16,14 +16,14 @@
  * Plugin Name:       TP WooCommerce Product Gallery
  * Plugin URI:        https://www.tplugins.com/
  * Description:       Increase your sales by change woocommerce default product gallery to beautiful gallery with a lot of new features.
- * Version:           1.1.5
+ * Version:           1.1.6
  * Author:            TP Plugins
  * License:           GPL-2.0+
  * License URI:       http://www.gnu.org/licenses/gpl-2.0.txt
  * Text Domain:       tp-woocommerce-product-gallery
  * Domain Path:       /languages
  * WC requires at least: 3.0
- * WC tested up to: 8.4.0
+ * WC tested up to: 9.5.2
  */
 
 // If this file is called directly, abort.
@@ -43,7 +43,7 @@ if ( !in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', 
  * Start at version 1.0.0 and use SemVer - https://semver.org
  * Rename this for your plugin and update it as you release new versions.
  */
-define('TP_WOOCOMMERCE_PRODUCT_GALLERY_VERSION', '1.1.5');
+define('TP_WOOCOMMERCE_PRODUCT_GALLERY_VERSION', '1.1.6');
 define('TPWPG_PLUGIN_BASENAME', plugin_basename(__FILE__));
 define('TPWPG_PLUGIN_HOME', 'https://www.tplugins.com/');
 define('TPWPG_PLUGIN_NAME', 'TP Woocommerce Product Gallery');

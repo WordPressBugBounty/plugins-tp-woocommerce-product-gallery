@@ -3,8 +3,8 @@ Contributors: tpplugins
 Donate link: https://www.tplugins.com/
 Tags: product gallery slider,woocommerce product gallery slider,woocommerce product image slider,woocommerce product gallery carousel
 Requires at least: 4.5
-Tested up to: 6.4.2
-Stable tag: 1.1.5
+Tested up to: 6.7.1
+Stable tag: 1.1.6
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -113,6 +113,10 @@ Yes you can, go to plugin Settings and change colors, background, icons and more
 
 
 == Changelog ==
+
+= 1.1.6 - Update =
+* Update - WordPress 6.7.1 compatibility
+* Update - WooCommerce 9.5.2 compatibility
 
 = 1.1.5 - Update =
 * Update - WordPress 6.5.2 compatibility

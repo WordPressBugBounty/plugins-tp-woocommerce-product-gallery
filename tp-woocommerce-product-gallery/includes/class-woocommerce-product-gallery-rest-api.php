@@ -62,7 +62,7 @@ class TP_Woocommerce_Product_Gallery_Rest_Api {
 	}
 
 	public static function check_license_key_expires() {
-		$today = date('Y-m-d');
+		$today = gmdate('Y-m-d');
 		if ( self::get_api_expiresAt() >= $today ) {
 			return true;
 		}

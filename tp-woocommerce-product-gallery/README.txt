@@ -1,10 +1,10 @@
-=== TP Woocommerce Product Gallery ===
+=== TP WooCommerce Product Gallery ===
 Contributors: tpplugins
 Donate link: https://www.tplugins.com/
 Tags: product gallery slider,woocommerce product gallery slider,woocommerce product image slider,woocommerce product gallery carousel
 Requires at least: 4.5
-Tested up to: 6.7.1
-Stable tag: 1.1.8
+Tested up to: 6.9
+Stable tag: 2.0.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -113,6 +113,27 @@ Yes you can, go to plugin Settings and change colors, background, icons and more
 
 
 == Changelog ==
+
+= 2.0.1 - Major Security Update =
+* Update - WordPress 6.9 compatibility
+* Update - WooCommerce latest compatibility
+
+= 2.0.0 - Major Security Update =
+* Security - COMPLETE FIX for DOM-Based XSS vulnerability by replacing lightGallery library
+* New - Built custom secure lightbox to replace vulnerable lightGallery library
+* Security - Eliminated all DOM-based XSS risks with new secure implementation
+* Removed - lightGallery library and all related security vulnerabilities
+* Removed - Mode and Mousewheel settings (no longer needed with new lightbox)
+* Fixed - Lightbox now opens only on fullscreen button click (not thumbnails)
+* Improved - Faster loading and smaller file size without heavy lightGallery library
+* Update - WordPress 6.8 compatibility
+* Update - WooCommerce latest compatibility
+
+= 1.1.9 - Security Update =
+* Security - Fixed DOM-Based XSS vulnerability in lightGallery library
+* Security - Added proper input sanitization and output escaping throughout the plugin
+* Update - WordPress 6.8.2 compatibility
+* Update - WooCommerce 10.1.2 compatibility
 
 = 1.1.8 - Update =
 * Update - WordPress 6.8.2 compatibility

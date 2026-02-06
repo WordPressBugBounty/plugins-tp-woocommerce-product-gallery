@@ -81,9 +81,9 @@ class Woocommerce_Product_Gallery_Public {
 
 		wp_enqueue_style( $this->plugin_name.'-tpslick-theme', plugin_dir_url( __FILE__ ) . 'css/tpslick-theme.css', array(), $this->version, 'all' );
 
-		wp_enqueue_style( $this->plugin_name.'-lightgallery.min', plugin_dir_url( __FILE__ ) . 'css/lightgallery.min.css', array(), $this->version, 'all' );
+		wp_enqueue_style( $this->plugin_name.'-tp-lightbox', plugin_dir_url( __FILE__ ) . 'css/tp-lightbox.css', array(), $this->version, 'all' );
 
-		wp_enqueue_style( $this->plugin_name.'-lg-transitions.min', plugin_dir_url( __FILE__ ) . 'css/lg-transitions.min.css', array(), $this->version, 'all' );
+
 
 	}
 
@@ -112,9 +112,7 @@ class Woocommerce_Product_Gallery_Public {
 
 		wp_enqueue_script( $this->plugin_name.'-jquery.zoom', plugin_dir_url( __FILE__ ) . 'js/jquery.zoom.min.js', array( 'jquery' ), $this->version, false );
 
-		wp_enqueue_script( $this->plugin_name.'-jquery.mousewheel.min', plugin_dir_url( __FILE__ ) . 'js/jquery.mousewheel.min.js', array( 'jquery' ), $this->version, false );
-
-		wp_enqueue_script( $this->plugin_name.'-lightgallery-all.min', plugin_dir_url( __FILE__ ) . 'js/lightgallery-all.min.js', array( 'jquery' ), $this->version, false );
+		wp_enqueue_script( $this->plugin_name.'-tp-lightbox', plugin_dir_url( __FILE__ ) . 'js/tp-lightbox.js', array( 'jquery' ), $this->version, false );
 
 		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/woocommerce-product-gallery-public.js', array( 'jquery' ), $this->version, false );
 
@@ -140,6 +138,7 @@ class Woocommerce_Product_Gallery_Public {
 		//$tpwpg_lightbox_mode = get_option('tpwpg_lightbox_mode');
 		$tpwpg_active_lightbox_html = '';
 		$lightbox_loop = '';
+		$lightbox_data = array();
 		//---------------------------------------------------------
 		$tpwpg_lightbox_product_name = get_option('tpwpg_lightbox_product_name');
 		//Zoom Options
@@ -173,7 +172,7 @@ class Woocommerce_Product_Gallery_Public {
 		if($gallery_image_ids){
 			$img_num = count($gallery_image_ids);
 
-			$html  = '<div class="tpwpg-main images tpwpg-regular tpcol-'.$img_num.'">';
+			$html  = '<div class="tpwpg-main images tpwpg-regular tpcol-'.intval($img_num).'">';
 				//$html .= '<section class="tpwpg-regular slider">';
 				$sliderfor = '';
 				$slidernav = '';
@@ -197,7 +196,7 @@ class Woocommerce_Product_Gallery_Public {
 							if(isset($available_variation['image']['title']) && $attachment_title == $available_variation['image']['title']){
 								$attributes = $available_variation['attributes'];
 								foreach ($attributes as $key => $value) {
-									$data_att_variation .= $value.',';
+									$data_att_variation .= esc_attr($value).',';
 								}
 							} //if(isset($available_variation['image']['title']) && $attachment_title == $available_variation['image']['title'])
 						} //foreach ($available_variations as $available_variation)
@@ -227,9 +226,9 @@ class Woocommerce_Product_Gallery_Public {
 					$image_h_small = $image_obj_small[2];
 
 					$sliderfor .= '<div class="tpwpg-big">';
-						$sliderfor .= '<span class="'.$tpwpg_zoom_class.'" id="ex'.$i.'">';
+						$sliderfor .= '<span class="'.esc_attr($tpwpg_zoom_class).'" id="ex'.intval($i).'">';
 						
-							$sliderfor .= '<img src="'.$image_src_big.'" data-imgid="'.$attachment_id.'" '.$data_att_variations.' alt="'.$attachment_title.'" title="'.$attachment_title.'">';
+							$sliderfor .= '<img src="'.esc_url($image_src_big).'" data-imgid="'.esc_attr($attachment_id).'" '.$data_att_variations.' alt="'.esc_attr($attachment_title).'" title="'.esc_attr($attachment_title).'">';
 
 							if($tpwpg_active_zoom){
 								$sliderfor .= '<svg xmlns="http://www.w3.org/2000/svg" version="1.0" width="100px" height="100px" viewBox="0 0 880.000000 880.000000" preserveAspectRatio="xMidYMid meet">
@@ -249,31 +248,27 @@ class Woocommerce_Product_Gallery_Public {
 					$sliderfor .= '</div>';
 
 					$slidernav .= '<div class="tpwpg-thumbnail">';
-						$slidernav .= '<img src="'.$image_src_small.'" data-imgid="'.$attachment_id.'" '.$data_att_variations.' alt="'.$attachment_title.'" title="'.$attachment_title.'">';
+						$slidernav .= '<img src="'.esc_url($image_src_small).'" data-imgid="'.esc_attr($attachment_id).'" '.$data_att_variations.' alt="'.esc_attr($attachment_title).'" title="'.esc_attr($attachment_title).'">';
 					$slidernav .= '</div>';
 					
 					$image_obj_full = wp_get_attachment_image_src( $attachment_id, 'full' );
 					$image_src_full = $image_obj_full[0];
 					
-					if($tpwpg_active_lightbox){
+					// Build lightbox data for all images (needed for lightbox)
+					if($tpwpg_youtube_url){
+						$image_src_full = $tpwpg_youtube_url;
+					} //if($tpwpg_youtube_url)
 
-						if($tpwpg_youtube_url){
-							$image_src_full = $tpwpg_youtube_url;
-						} //if($tpwpg_youtube_url)
+					$lightbox_caption = '';
+					if($tpwpg_active_lightbox && $tpwpg_lightbox_product_name){
+						$lightbox_caption = esc_js($attachment_title);
+					}
 
-						if($tpwpg_lightbox_product_name){
-							$data_sub_html = 'data-sub-html="<h4>'.$attachment_title.'</h4>"';
-						} //if($tpwpg_lightbox_product_name)
-						else{
-							$data_sub_html = '';
-						} //else
-
-						$lightbox_loop .= '<li id="lightgallery'.$i.'" class="" data-src="'.$image_src_full.'" '.$data_sub_html.'>';
-							$lightbox_loop .= '<a href="">';
-								$lightbox_loop .= '<img class="img-responsive" src="'.$image_src_small.'">';
-							$lightbox_loop .= '</a>';
-						$lightbox_loop .= '</li>';
-					} //if($tpwpg_active_lightbox)
+					$lightbox_data[] = array(
+						'src' => esc_url($image_src_full),
+						'alt' => esc_attr($attachment_title),
+						'caption' => $lightbox_caption
+					);
 
 					$i++;
 				}
@@ -304,7 +299,12 @@ class Woocommerce_Product_Gallery_Public {
 								</svg>
 							  </span>';
 
-					$html .= '<ul id="lightgallery" style="display:none;">'.$lightbox_loop.'</ul>';
+					// Add lightbox data to JavaScript
+					if(!empty($lightbox_data)){
+						$html .= '<script type="text/javascript">';
+						$html .= 'var tpLightboxData = ' . json_encode($lightbox_data) . ';';
+						$html .= '</script>';
+					}
 				} //if($tpwpg_active_lightbox)
 
 				//$html .= '</section>';
@@ -333,13 +333,13 @@ class Woocommerce_Product_Gallery_Public {
 
 		//-----------------------------------------------------------
 		$tpwpg_active_lightbox = get_option('tpwpg_active_lightbox');
-		$tpwpg_lightbox_mode = get_option('tpwpg_lightbox_mode');
+
 		
 		$tpwpg_lightbox_speed = get_option('tpwpg_lightbox_speed');
 		$tpwpg_lightbox_hideBarsDelay = get_option('tpwpg_lightbox_hideBarsDelay');
 		$tpwpg_lightbox_closable = get_option('tpwpg_lightbox_closable');
 		$tpwpg_lightbox_loop = get_option('tpwpg_lightbox_loop');
-		$tpwpg_lightbox_mousewheel = get_option('tpwpg_lightbox_mousewheel');
+
 
 		//-----------------------------------------------------------
 
@@ -361,7 +361,7 @@ class Woocommerce_Product_Gallery_Public {
 		$tpwpg_lightbox_closable = ($tpwpg_lightbox_closable) ? 'true' : 'false';
 		
 		$tpwpg_lightbox_loop = ($tpwpg_lightbox_loop) ? 'true' : 'false';
-		$tpwpg_lightbox_mousewheel = ($tpwpg_lightbox_mousewheel) ? 'true' : 'false';
+
 		
 		?>
 			<script>
@@ -369,21 +369,14 @@ class Woocommerce_Product_Gallery_Public {
 
 				<?php if($tpwpg_active_lightbox): ?>
 
-					//jQuery('#lightgallery').lightGallery();
-					jQuery('#lightgallery').lightGallery({
-						mode: '<?php echo $tpwpg_lightbox_mode; ?>',
-						thumbnail: false,
-						speed: <?php echo $tpwpg_lightbox_speed; ?>,
-						hideBarsDelay: <?php echo $tpwpg_lightbox_hideBarsDelay; ?>,
-						loop: <?php echo $tpwpg_lightbox_loop; ?>,
-						closable: <?php echo $tpwpg_lightbox_closable; ?>,
-						mousewheel: <?php echo $tpwpg_lightbox_mousewheel; ?>,
-						download: false,
-					}); 
+					// TP Lightbox - Secure replacement for lightGallery
+					if (typeof tpLightboxData !== 'undefined' && window.tpLightbox) {
 
-					jQuery('#launchGallery').click(function(){
-						jQuery('#lightgallery1').trigger('click');    
-					})
+						// Open lightbox ONLY when clicking fullscreen button
+						jQuery('#launchGallery').click(function(){
+							openTPLightbox(tpLightboxData, 0);
+						});
+					}
 				<?php endif; //if($tpwpg_active_lightbox) ?>
 
 				<?php if($tpwpg_active_zoom): ?>
@@ -394,7 +387,7 @@ class Woocommerce_Product_Gallery_Public {
 
 				jQuery('.slider-for').tpslick({
 					// dots: true,
-					speed: <?php echo $tpwpg_speed; ?>,
+					speed: <?php echo intval($tpwpg_speed); ?>,
 					slidesToShow: 1,
 					slidesToScroll: 1,
 					<?php if(is_rtl()): ?>
@@ -402,8 +395,8 @@ class Woocommerce_Product_Gallery_Public {
 					<?php else: ?>
 						rtl: false,
 					<?php endif; ?>
-					fade: <?php echo $tpwpg_fade; ?>,
-					draggable: <?php echo $tpwpg_draggable; ?>,
+					fade: <?php echo esc_js($tpwpg_fade); ?>,
+					draggable: <?php echo esc_js($tpwpg_draggable); ?>,
 					<?php if($tpwpg_adaptiveHeight): ?>
 						adaptiveHeight: true,
 					<?php endif; ?>
@@ -412,7 +405,7 @@ class Woocommerce_Product_Gallery_Public {
 						arrows: false,
 					<?php else: ?>
 						arrows: true,
-						dots: <?php echo $tpwpg_dots; ?>,
+						dots: <?php echo esc_js($tpwpg_dots); ?>,
 					<?php endif; ?>
 				});
 
@@ -420,7 +413,7 @@ class Woocommerce_Product_Gallery_Public {
 				jQuery('.slider-nav').tpslick({
 					slidesToShow: 4,
 					slidesToScroll: 1,
-					infinite: <?php echo $tpwpg_infinite; ?>,
+					infinite: <?php echo esc_js($tpwpg_infinite); ?>,
 					<?php if(is_rtl()): ?>
 						<?php if($tpwpg_vertical == 'true'): ?>
 							rtl: false,
@@ -431,10 +424,10 @@ class Woocommerce_Product_Gallery_Public {
 						rtl: false,
 					<?php endif; ?>
 					asNavFor: '.slider-for',
-					dots: <?php echo $tpwpg_dots; ?>,
-					draggable: <?php echo $tpwpg_draggable; ?>,
-					centerMode: <?php echo $tpwpg_centerMode; ?>,
-					focusOnSelect: <?php echo $tpwpg_focusOnSelect; ?>,
+					dots: <?php echo esc_js($tpwpg_dots); ?>,
+					draggable: <?php echo esc_js($tpwpg_draggable); ?>,
+					centerMode: <?php echo esc_js($tpwpg_centerMode); ?>,
+					focusOnSelect: <?php echo esc_js($tpwpg_focusOnSelect); ?>,
 				});
 				<?php endif; //if($tpwpg_thumbnail) ?>
 
@@ -487,30 +480,30 @@ class Woocommerce_Product_Gallery_Public {
 			<style>
 				@media (min-width: 768px){
 					.tpwpg-main{
-						float: <?php echo $float; ?>;
+						float: <?php echo esc_attr($float); ?>;
 					}
 				}
 				.tpwpg-vertical .slider-nav{
-					float: <?php echo $float; ?>;
+					float: <?php echo esc_attr($float); ?>;
 				}
 				.tpwpg-vertical .slider-for{
-					float: <?php echo $float_lang; ?>;
+					float: <?php echo esc_attr($float_lang); ?>;
 				}
 				.tpslick-vertical .tpslick-slide {
-					border-right: <?php echo $border_right; ?>;
-					border-left: <?php echo $border_left; ?>;
+					border-right: <?php echo esc_attr($border_right); ?>;
+					border-left: <?php echo esc_attr($border_left); ?>;
 				}
 				.launchGallery svg,
 				.tpwpg_zoom svg{
-					background:<?php echo $tpwpg_icons_background; ?> !important;
+					background:<?php echo esc_attr($tpwpg_icons_background); ?> !important;
 				}
 				.tpslick-prev,
 				.tpslick-next{
-					background:<?php echo $tpwpg_arrow_background; ?> !important;
+					background:<?php echo esc_attr($tpwpg_arrow_background); ?> !important;
 				}
 				.tpslick-prev:hover, .tpslick-prev:focus,
 				.tpslick-next:hover, .tpslick-next:focus{
-					background:<?php echo $tpwpg_arrow_background; ?> !important;
+					background:<?php echo esc_attr($tpwpg_arrow_background); ?> !important;
 					opacity: 0.5;
 				}
 
@@ -529,21 +522,21 @@ class Woocommerce_Product_Gallery_Public {
 				}
 
 				.tpwpg-big p {
-					<?php echo $float_lang; ?>: 38px;
-					<?php echo $float; ?>: auto;
+					<?php echo esc_attr($float_lang); ?>: 38px;
+					<?php echo esc_attr($float); ?>: auto;
 				}
 				.tpwpg_zoom svg {
-					<?php echo $float_lang; ?>: 5px;
-					<?php echo $float; ?>: auto;
+					<?php echo esc_attr($float_lang); ?>: 5px;
+					<?php echo esc_attr($float); ?>: auto;
 				}
 				.launchGallery {
-					<?php echo $float_lang; ?>: 4px;
-					<?php echo $float; ?>: auto;
+					<?php echo esc_attr($float_lang); ?>: 4px;
+					<?php echo esc_attr($float); ?>: auto;
 					<?php if(!$tpwpg_active_zoom): ?>
 						top:5px;
 					<?php endif; ?>
 				}
-				.tpslick-<?php echo $prev; ?> svg{
+				.tpslick-<?php echo esc_attr($prev); ?> svg{
 					-webkit-transform: rotate(90deg);
 					-moz-transform: rotate(90deg);
 					-ms-transform: rotate(90deg);
@@ -551,7 +544,7 @@ class Woocommerce_Product_Gallery_Public {
 					/* filter: progid: DXImageTransform.Microsoft.BasicImage(rotation=-2); */
 				}
 
-				.tpslick-<?php echo $next; ?> svg{
+				.tpslick-<?php echo esc_attr($next); ?> svg{
 					-webkit-transform: rotate(-90deg);
 					-moz-transform: rotate(-90deg);
 					-ms-transform: rotate(-90deg);
@@ -560,13 +553,13 @@ class Woocommerce_Product_Gallery_Public {
 				}
 
 				.tpslick-prev svg g, .tpslick-next svg g{
-					fill: <?php echo $tpwpg_arrow_color; ?>;
+					fill: <?php echo esc_attr($tpwpg_arrow_color); ?>;
 				}
 				.launchGallery svg g,
 				.tpwpg_zoom svg g{
-					fill: <?php echo $tpwpg_icons_color; ?>;
+					fill: <?php echo esc_attr($tpwpg_icons_color); ?>;
 				}
-				.tpcol-<?php echo $tpwpg_disable_thumbnail_less_than; ?> .slider-nav{
+				.tpcol-<?php echo esc_attr($tpwpg_disable_thumbnail_less_than); ?> .slider-nav{
 					display: none;
 				}
 			</style>

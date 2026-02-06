@@ -178,7 +178,7 @@ class Woocommerce_Product_Gallery_Admin {
 		//-------------------------------------- Lightbox --------------------------------------
 		$tpwpg_active_lightbox = get_option('tpwpg_active_lightbox');
 		$tpwpg_active_lightbox_check = ($tpwpg_active_lightbox) ? 'checked="checked"' : '';
-		$tpwpg_lightbox_mode = get_option('tpwpg_lightbox_mode');
+
 		
 		$tpwpg_lightbox_speed = get_option('tpwpg_lightbox_speed');
 		$tpwpg_lightbox_hideBarsDelay = get_option('tpwpg_lightbox_hideBarsDelay');
@@ -186,8 +186,7 @@ class Woocommerce_Product_Gallery_Admin {
 		$tpwpg_lightbox_closable_check = ($tpwpg_lightbox_closable) ? 'checked="checked"' : '';
 		$tpwpg_lightbox_loop = get_option('tpwpg_lightbox_loop');
 		$tpwpg_lightbox_loop_check = ($tpwpg_lightbox_loop) ? 'checked="checked"' : '';
-		$tpwpg_lightbox_mousewheel = get_option('tpwpg_lightbox_mousewheel');
-		$tpwpg_lightbox_mousewheel_check = ($tpwpg_lightbox_mousewheel) ? 'checked="checked"' : '';
+
 		$tpwpg_lightbox_product_name = get_option('tpwpg_lightbox_product_name');
 		$tpwpg_lightbox_product_name_check = ($tpwpg_lightbox_product_name) ? 'checked="checked"' : '';
 		$tpwpg_lightbox_loadYoutubeThumbnail = get_option('tpwpg_lightbox_loadYoutubeThumbnail');
@@ -195,7 +194,6 @@ class Woocommerce_Product_Gallery_Admin {
 		
 	?>
 		<div class='wrap tpwpg-warp'>
-			<?php screen_icon(); ?>
 			<h2>TP Woocommerce Product Gallery Settings</h2>
 			<form method="post" action="options.php">
 				<?php //wp_nonce_field('update-options') ?>
@@ -219,7 +217,7 @@ class Woocommerce_Product_Gallery_Admin {
 							<div class="tpwpg_admin_settings_row">
 
 								<label class="tpwpg-container-checkbox">Display Thumbnail
-									<input type="checkbox" name="tpwpg_thumbnail" value="1" <?php echo $tpwpg_thumbnail_check; ?>>
+									<input type="checkbox" name="tpwpg_thumbnail" value="1" <?php echo esc_attr($tpwpg_thumbnail_check); ?>>
 									<span class="checkmark"></span>
 								</label>
 
@@ -255,7 +253,7 @@ class Woocommerce_Product_Gallery_Admin {
 							<div class="tpwpg_admin_settings_row">
 
 								<label class="tpwpg-container-checkbox">Display Dots
-									<input type="checkbox" name="tpwpg_dots" value="1" <?php echo $tpwpg_dots_check; ?>>
+									<input type="checkbox" name="tpwpg_dots" value="1" <?php echo esc_attr($tpwpg_dots_check); ?>>
 									<span class="checkmark"></span>
 								</label>
 
@@ -266,7 +264,7 @@ class Woocommerce_Product_Gallery_Admin {
 							<div class="tpwpg_admin_settings_row">
 
 								<label class="tpwpg-container-checkbox">Draggable
-									<input type="checkbox" name="tpwpg_draggable" value="1" <?php echo $tpwpg_draggable_check; ?>>
+									<input type="checkbox" name="tpwpg_draggable" value="1" <?php echo esc_attr($tpwpg_draggable_check); ?>>
 									<span class="checkmark"></span>
 								</label>
 
@@ -277,7 +275,7 @@ class Woocommerce_Product_Gallery_Admin {
 							<div class="tpwpg_admin_settings_row">
 
 								<label class="tpwpg-container-checkbox">Fade
-									<input type="checkbox" name="tpwpg_fade" value="1" <?php echo $tpwpg_fade_check; ?>>
+									<input type="checkbox" name="tpwpg_fade" value="1" <?php echo esc_attr($tpwpg_fade_check); ?>>
 									<span class="checkmark"></span>
 								</label>
 
@@ -288,7 +286,7 @@ class Woocommerce_Product_Gallery_Admin {
 							<div class="tpwpg_admin_settings_row">
 
 								<label class="tpwpg-container-checkbox">FocusOnSelect
-									<input type="checkbox" name="tpwpg_focusOnSelect" value="1" <?php echo $tpwpg_focusOnSelect_check; ?>>
+									<input type="checkbox" name="tpwpg_focusOnSelect" value="1" <?php echo esc_attr($tpwpg_focusOnSelect_check); ?>>
 									<span class="checkmark"></span>
 								</label>
 
@@ -299,7 +297,7 @@ class Woocommerce_Product_Gallery_Admin {
 							<div class="tpwpg_admin_settings_row">
 
 								<label class="tpwpg-container-checkbox">Accessibility
-									<input type="checkbox" name="tpwpg_accessibility" value="1" <?php echo $tpwpg_accessibility_check; ?>>
+									<input type="checkbox" name="tpwpg_accessibility" value="1" <?php echo esc_attr($tpwpg_accessibility_check); ?>>
 									<span class="checkmark"></span>
 								</label>
 
@@ -310,7 +308,7 @@ class Woocommerce_Product_Gallery_Admin {
 							<div class="tpwpg_admin_settings_row">
 
 								<label class="tpwpg-container-text">Speed
-									<input type="number" name="tpwpg_speed" value="<?php echo $tpwpg_speed; ?>" />
+									<input type="number" name="tpwpg_speed" value="<?php echo esc_attr($tpwpg_speed); ?>" />
 								</label>
 
 								<span class="tpwpg_admin_settings_desc">Slide/Fade animation speed</span>
@@ -319,7 +317,7 @@ class Woocommerce_Product_Gallery_Admin {
 
 							<div class="tpwpg_admin_settings_row">
 								<label class="tpwpg-container-checkbox">AdaptiveHeight
-									<input type="checkbox" name="tpwpg_adaptiveHeight" value="1" <?php echo $tpwpg_adaptiveHeight_check; ?>>
+									<input type="checkbox" name="tpwpg_adaptiveHeight" value="1" <?php echo esc_attr($tpwpg_adaptiveHeight_check); ?>>
 									<span class="checkmark"></span>
 								</label>
 
@@ -349,7 +347,7 @@ class Woocommerce_Product_Gallery_Admin {
 							<div class="tpwpg_admin_settings_row">
 
 								<label class="tpwpg-container-checkbox">Arrows
-									<input type="checkbox" name="tpwpg_arrows" value="1" <?php echo $tpwpg_arrows_check; ?>>
+									<input type="checkbox" name="tpwpg_arrows" value="1" <?php echo esc_attr($tpwpg_arrows_check); ?>>
 									<span class="checkmark"></span>
 								</label>
 
@@ -361,7 +359,7 @@ class Woocommerce_Product_Gallery_Admin {
 
 								<div class="tpwpg_admin_settings_row_2">
 									<label class="tpwpg-container-checkbox">CenterMode
-										<input type="checkbox" name="tpwpg_centerMode" value="1" <?php echo $tpwpg_centerMode_check; ?>>
+										<input type="checkbox" name="tpwpg_centerMode" value="1" <?php echo esc_attr($tpwpg_centerMode_check); ?>>
 										<span class="checkmark"></span>
 									</label>
 									<span class="tpwpg_admin_settings_desc">Enables centered view with partial prev/next slides. Use with odd numbered slidesToShow counts</span>
@@ -369,7 +367,7 @@ class Woocommerce_Product_Gallery_Admin {
 
 								<div class="tpwpg_admin_settings_row_2">
 									<label class="tpwpg-container-text">CenterPadding</label>
-									<input type="text" name="tpwpg_centerPadding" value="<?php echo $tpwpg_centerPadding; ?>" />
+									<input type="text" name="tpwpg_centerPadding" value="<?php echo esc_attr($tpwpg_centerPadding); ?>" />
 									<span class="tpwpg_admin_settings_desc">Side padding when in center mode (px or %)</span>
 								</div>
 
@@ -378,7 +376,7 @@ class Woocommerce_Product_Gallery_Admin {
 							<div class="tpwpg_admin_settings_row">
 
 								<label class="tpwpg-container-checkbox">Infinite
-									<input type="checkbox" name="tpwpg_infinite" value="1" <?php echo $tpwpg_infinite_check; ?>>
+									<input type="checkbox" name="tpwpg_infinite" value="1" <?php echo esc_attr($tpwpg_infinite_check); ?>>
 									<span class="checkmark"></span>
 								</label>
 
@@ -413,7 +411,7 @@ class Woocommerce_Product_Gallery_Admin {
 							<div class="tpwpg_admin_settings_row">
 								<div class="tpwpg_triangle_topright_box"><div class="tpwpg_triangle_topright"><span>PRO</span></div></div>
 								<label class="tpwpg-container-text">Image size</label>
-								<?php echo $this->tpwpg_add_image_size_field($tpwpg_imageSize); ?>
+								<?php echo wp_kses_post($this->tpwpg_add_image_size_field($tpwpg_imageSize)); ?>
 								<span class="tpwpg_admin_settings_desc">Select you image size</span>
 
 							</div><!-- tpwpg_admin_settings_row -->
@@ -432,7 +430,7 @@ class Woocommerce_Product_Gallery_Admin {
 							<div class="tpwpg_admin_settings_row">
 
 								<label class="tpwpg-container-text">Button arrow background</label>
-								<input type="text" class="tp_colorpiker" name="tpwpg_arrow_background" value="<?php echo $tpwpg_arrow_background; ?>" autocomplete="off">
+								<input type="text" class="tp_colorpiker" name="tpwpg_arrow_background" value="<?php echo esc_attr($tpwpg_arrow_background); ?>" autocomplete="off">
 
 								<span class="tpwpg_admin_settings_desc">Next / Prev background</span>
 
@@ -441,7 +439,7 @@ class Woocommerce_Product_Gallery_Admin {
 							<div class="tpwpg_admin_settings_row">
 
 								<label class="tpwpg-container-text">Button arrow color</label>
-								<input type="text" class="tp_colorpiker" name="tpwpg_arrow_color" value="<?php echo $tpwpg_arrow_color; ?>" autocomplete="off">
+								<input type="text" class="tp_colorpiker" name="tpwpg_arrow_color" value="<?php echo esc_attr($tpwpg_arrow_color); ?>" autocomplete="off">
 
 								<span class="tpwpg_admin_settings_desc">Next / Prev color</span>
 
@@ -450,7 +448,7 @@ class Woocommerce_Product_Gallery_Admin {
 							<div class="tpwpg_admin_settings_row">
 
 								<label class="tpwpg-container-text">Icons background</label>
-								<input type="text" class="tp_colorpiker" name="tpwpg_icons_background" value="<?php echo $tpwpg_icons_background; ?>" autocomplete="off">
+								<input type="text" class="tp_colorpiker" name="tpwpg_icons_background" value="<?php echo esc_attr($tpwpg_icons_background); ?>" autocomplete="off">
 
 								<span class="tpwpg_admin_settings_desc">zoom and fullscreen</span>
 
@@ -459,7 +457,7 @@ class Woocommerce_Product_Gallery_Admin {
 							<div class="tpwpg_admin_settings_row">
 
 								<label class="tpwpg-container-text">Icons color</label>
-								<input type="text" class="tp_colorpiker" name="tpwpg_icons_color" value="<?php echo $tpwpg_icons_color; ?>" autocomplete="off">
+								<input type="text" class="tp_colorpiker" name="tpwpg_icons_color" value="<?php echo esc_attr($tpwpg_icons_color); ?>" autocomplete="off">
 
 								<span class="tpwpg_admin_settings_desc">zoom and fullscreen</span>
 
@@ -494,7 +492,7 @@ class Woocommerce_Product_Gallery_Admin {
 							<div class="tpwpg_admin_settings_row">
 								<div class="tpwpg_triangle_topright_box"><div class="tpwpg_triangle_topright"><span>PRO</span></div></div>
 								<label class="tpwpg-container-checkbox">LoadYoutubeThumbnail (on Lightbox)
-									<input type="checkbox" name="tpwpg_lightbox_loadYoutubeThumbnail" value="1" <?php echo $tpwpg_lightbox_loadYoutubeThumbnail_check; ?>>
+									<input type="checkbox" name="tpwpg_lightbox_loadYoutubeThumbnail" value="1" <?php echo esc_attr($tpwpg_lightbox_loadYoutubeThumbnail_check); ?>>
 									<span class="checkmark"></span>
 								</label>
 								<span class="tpwpg_admin_settings_desc">You can automatically load thumbnails for youtube videos from youtube by setting loadYoutubeThumbnail true</span>
@@ -511,7 +509,7 @@ class Woocommerce_Product_Gallery_Admin {
 							<div class="tpwpg_admin_settings_row">
 
 								<label class="tpwpg-container-checkbox">Active Zoom on image over
-									<input type="checkbox" name="tpwpg_active_zoom" value="1" <?php echo $tpwpg_active_zoom_check; ?>>
+									<input type="checkbox" name="tpwpg_active_zoom" value="1" <?php echo esc_attr($tpwpg_active_zoom_check); ?>>
 									<span class="checkmark"></span>
 								</label>
 
@@ -537,7 +535,7 @@ class Woocommerce_Product_Gallery_Admin {
 
 							<div class="tpwpg_admin_settings_row">
 								<label class="tpwpg-container-checkbox">Active Lightbox
-									<input type="checkbox" name="tpwpg_active_lightbox" value="1" <?php echo $tpwpg_active_lightbox_check; ?>>
+									<input type="checkbox" name="tpwpg_active_lightbox" value="1" <?php echo esc_attr($tpwpg_active_lightbox_check); ?>>
 									<span class="checkmark"></span>
 								</label>
 								
@@ -552,63 +550,23 @@ class Woocommerce_Product_Gallery_Admin {
 								<span class="tpwpg_admin_settings_desc">Enable thumbnails for the gallery</span>
 							</div><!-- tpwpg_admin_settings_row -->
 
-							<div class="tpwpg_admin_settings_row">
 
-								<label class="tpwpg-container-text">Mode</label>
-								<select id="select-trans" class="select-trans" name="tpwpg_lightbox_mode">
-									<option selected="selected" value="lg-slide">lg-slide</option>
-									<option value="lg-fade">lg-fade</option>
-									<option value="lg-zoom-in">lg-zoom-in</option>
-									
-									<option value="tppg-lg-zoom-in-big-pro" disabled>lg-zoom-in-big (PRO)</option> 
-									<option value="tppg-lg-zoom-out-pro" disabled>lg-zoom-out (PRO)</option> 
-									<option value="tppg-lg-zoom-out-big-pro" disabled>lg-zoom-out-big (PRO)</option> 
-									<option value="tppg-lg-zoom-out-in-pro" disabled>lg-zoom-out-in (PRO)</option> 
-									<option value="tppg-lg-zoom-in-out-pro" disabled>lg-zoom-in-out (PRO)</option> 
-									<option value="tppg-lg-soft-zoom-pro" disabled>lg-soft-zoom (PRO)</option> 
-									<option value="tppg-lg-scale-up-pro" disabled>lg-scale-up (PRO)</option> 
-									<option value="tppg-lg-slide-circular-pro" disabled>lg-slide-circular (PRO)</option> 
-									<option value="tppg-lg-slide-circular-vertical-pro" disabled>lg-slide-circular-vertical (PRO)</option> 
-									<option value="tppg-lg-slide-vertical-pro" disabled>lg-slide-vertical (PRO)</option> 
-									<option value="tppg-lg-slide-vertical-growth-pro" disabled>lg-slide-vertical-growth (PRO)</option> 
-									<option value="tppg-lg-slide-skew-only-pro" disabled>lg-slide-skew-only (PRO)</option> 
-									<option value="tppg-lg-slide-skew-only-rev-pro" disabled>lg-slide-skew-only-rev (PRO)</option> 
-									<option value="tppg-lg-slide-skew-only-y-pro" disabled>lg-slide-skew-only-y (PRO)</option> 
-									<option value="tppg-lg-slide-skew-only-y-rev-pro" disabled>lg-slide-skew-only-y-rev (PRO)</option> 
-									<option value="tppg-lg-slide-skew-pro" disabled>lg-slide-skew (PRO)</option> 
-									<option value="tppg-lg-slide-skew-rev-pro" disabled>lg-slide-skew-rev (PRO)</option> 
-									<option value="tppg-lg-slide-skew-cross-pro" disabled>lg-slide-skew-cross (PRO)</option> 
-									<option value="tppg-lg-slide-skew-cross-rev-pro" disabled>lg-slide-skew-cross-rev (PRO)</option> 
-									<option value="tppg-lg-slide-skew-ver-pro" disabled>lg-slide-skew-ver (PRO)</option> 
-									<option value="tppg-lg-slide-skew-ver-rev-pro" disabled>lg-slide-skew-ver-rev (PRO)</option> 
-									<option value="tppg-lg-slide-skew-ver-cross-pro" disabled>lg-slide-skew-ver-cross (PRO)</option> 
-									<option value="tppg-lg-slide-skew-ver-cross-rev-pro" disabled>lg-slide-skew-ver-cross-rev (PRO)</option> 
-									<option value="tppg-lg-lollipop-pro" disabled>lg-lollipop (PRO)</option> 
-									<option value="tppg-lg-lollipop-rev-pro" disabled>lg-lollipop-rev (PRO)</option> 
-									<option value="tppg-lg-rotate-pro" disabled>lg-rotate (PRO)</option> 
-									<option value="tppg-lg-rotate-rev-pro" disabled>lg-rotate-rev (PRO)</option> 
-									<option value="tppg-lg-tube-pro" disabled>lg-tube (PRO)</option>
-								</select>
-								
-								<span class="tpwpg_admin_settings_desc">Type of transition between images</span>
-
-							</div><!-- tpwpg_admin_settings_row -->
 
 							<div class="tpwpg_admin_settings_row">
 								<label class="tpwpg-container-text">Speed</label>
-								<input type="number" name="tpwpg_lightbox_speed" value="<?php echo $tpwpg_lightbox_speed; ?>">
+								<input type="number" name="tpwpg_lightbox_speed" value="<?php echo esc_attr($tpwpg_lightbox_speed); ?>">
 								<span class="tpwpg_admin_settings_desc">Transition duration (in ms)</span>
 							</div><!-- tpwpg_admin_settings_row -->
 
 							<div class="tpwpg_admin_settings_row">
 								<label class="tpwpg-container-text">HideBarsDelay</label>
-								<input type="number" name="tpwpg_lightbox_hideBarsDelay" value="6000">
+								<input type="number" name="tpwpg_lightbox_hideBarsDelay" value="<?php echo esc_attr($tpwpg_lightbox_hideBarsDelay); ?>">
 								<span class="tpwpg_admin_settings_desc">Delay for hiding gallery controls in ms</span>
 							</div><!-- tpwpg_admin_settings_row -->
 
 							<div class="tpwpg_admin_settings_row">
 								<label class="tpwpg-container-checkbox">Closable
-									<input type="checkbox" name="tpwpg_lightbox_closable" value="1" <?php echo $tpwpg_lightbox_closable_check; ?>>
+									<input type="checkbox" name="tpwpg_lightbox_closable" value="1" <?php echo esc_attr($tpwpg_lightbox_closable_check); ?>>
 									<span class="checkmark"></span>
 								</label>
 								<span class="tpwpg_admin_settings_desc">Allows clicks on dimmer to close gallery</span>
@@ -616,23 +574,17 @@ class Woocommerce_Product_Gallery_Admin {
 
 							<div class="tpwpg_admin_settings_row">
 								<label class="tpwpg-container-checkbox">Loop
-									<input type="checkbox" name="tpwpg_lightbox_loop" value="1" <?php echo $tpwpg_lightbox_loop_check; ?>>
+									<input type="checkbox" name="tpwpg_lightbox_loop" value="1" <?php echo esc_attr($tpwpg_lightbox_loop_check); ?>>
 									<span class="checkmark"></span>
 								</label>
 								<span class="tpwpg_admin_settings_desc">If false, will disabled the ability to loop back to the beginning of the gallery when on the last element</span>
 							</div><!-- tpwpg_admin_settings_row -->
 
-							<div class="tpwpg_admin_settings_row">
-								<label class="tpwpg-container-checkbox">Mousewheel
-									<input type="checkbox" name="tpwpg_lightbox_mousewheel" value="1" <?php echo $tpwpg_lightbox_mousewheel_check; ?>>
-									<span class="checkmark"></span>
-								</label>
-								<span class="tpwpg_admin_settings_desc">Change slide on mousewheel</span>
-							</div><!-- tpwpg_admin_settings_row -->
+
 
 							<div class="tpwpg_admin_settings_row">
 								<label class="tpwpg-container-checkbox">Display image attachment title
-									<input type="checkbox" name="tpwpg_lightbox_product_name" value="1" <?php echo $tpwpg_lightbox_product_name_check; ?>>
+									<input type="checkbox" name="tpwpg_lightbox_product_name" value="1" <?php echo esc_attr($tpwpg_lightbox_product_name_check); ?>>
 									<span class="checkmark"></span>
 								</label>
 								<span class="tpwpg_admin_settings_desc">If false, will disabled the image attachment title on image</span>
@@ -644,14 +596,14 @@ class Woocommerce_Product_Gallery_Admin {
 
 					<div class="tabtxt tps_admin_section" data-sort="6">
 						<h2>Free Version</h2>
-						<a href="<?php echo TPWPG_PLUGIN_HOME.'product/'.TPWPG_PLUGIN_PRO_SLUG; ?>" target="_blank">Upgrade from the FREE version to the PRO version</a>
+						<a href="<?php echo esc_url(TPWPG_PLUGIN_HOME.'product/'.TPWPG_PLUGIN_PRO_SLUG); ?>" target="_blank">Upgrade from the FREE version to the PRO version</a>
 					</div><!-- tps_admin_section -->
 
 				</div><!-- tpwpg-tab-contents -->
 
 				<input type="submit" name="Submit" value="Update Options" class="tps-gcf-submit" />
 				<input type="hidden" name="action" value="update" />
-            	<input type="hidden" name="page_options" value="tpwpg_adaptiveHeight,tpwpg_thumbnail,tpwpg_dots,tpwpg_accessibility,tpwpg_draggable,tpwpg_speed,tpwpg_fade,tpwpg_focusOnSelect,tpwpg_arrows,tpwpg_centerMode,tpwpg_centerPadding,tpwpg_infinite,tpwpg_arrow_background,tpwpg_arrow_color,tpwpg_icons_background,tpwpg_icons_color,tpwpg_active_zoom,tpwpg_active_lightbox,tpwpg_lightbox_speed,tpwpg_lightbox_hideBarsDelay,tpwpg_lightbox_mode,tpwpg_lightbox_closable,tpwpg_lightbox_loop,tpwpg_lightbox_mousewheel,tpwpg_lightbox_product_name,tpwpg_lightbox_loadYoutubeThumbnail" />
+            	<input type="hidden" name="page_options" value="tpwpg_adaptiveHeight,tpwpg_thumbnail,tpwpg_dots,tpwpg_accessibility,tpwpg_draggable,tpwpg_speed,tpwpg_fade,tpwpg_focusOnSelect,tpwpg_arrows,tpwpg_centerMode,tpwpg_centerPadding,tpwpg_infinite,tpwpg_arrow_background,tpwpg_arrow_color,tpwpg_icons_background,tpwpg_icons_color,tpwpg_active_zoom,tpwpg_active_lightbox,tpwpg_lightbox_speed,tpwpg_lightbox_hideBarsDelay,tpwpg_lightbox_closable,tpwpg_lightbox_loop,tpwpg_lightbox_product_name,tpwpg_lightbox_loadYoutubeThumbnail" />
 			</form>
 
 			<script>
@@ -747,7 +699,7 @@ class Woocommerce_Product_Gallery_Admin {
 		if ( TPWPG_PLUGIN_BASENAME == $file ) {
 	
 			$row_meta = array(
-				'docs' => '<a href="' . esc_url( 'https://www.tplugins.com/demos/product/v-neck-t-shirt/' ) . '" target="_blank" aria-label="' . esc_attr__( 'Live Demo', 'wtppcs' ) . '" class="tpc_live_demo">&#128073; ' . esc_html__( 'Live Demo', 'wtppcs' ) . '</a>'
+				'docs' => '<a href="' . esc_url( 'https://www.tplugins.com/demos/product/v-neck-t-shirt/' ) . '" target="_blank" aria-label="' . esc_attr__( 'Live Demo', 'tp-woocommerce-product-gallery' ) . '" class="tpc_live_demo">&#128073; ' . esc_html__( 'Live Demo', 'tp-woocommerce-product-gallery' ) . '</a>'
 			);
 	
 			return array_merge( $links, $row_meta );
